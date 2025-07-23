@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            display: inline-block;
+            margin-top: 20px;
+            border: 2px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 20px;
+            box-shadow: 0 4px #999, 0 -4px #fff; 
+        }
+        .display {
+            margin-bottom: 10px;
+            font-size: 24px;
+            width: 200px;
+            padding: 10px;
+            text-align: center;
+            background-color: #f0f0f0;
+            border: 2px solid #ccc;
+            margin-bottom: 10px;
+            border-radius: 20px;
+            box-shadow: 0 4px #999, 0 -4px #fff; 
+        }
+        .buttons input {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            background-color: #e6e6e6;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px #999, 0 -4px #fff; /* 3D effect */
+            transition: all 0.1s ease-in-out;
+        }
+        .buttons input:hover {
+            box-shadow: 0 6px #666, 0 -6px #fff; 
+        }
+        .buttons input:active {
+            transform: translateY(4px); /* Button pressing effect */
+            box-shadow: 0 2px #666, 0 -2px #fff; 
+        }
+        .buttons input#clear {
+            width: 80px;
+        }
+        .buttons input#square {
+            width: 60px; 
+        }
+        .last-row {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+    <script>
+        var a = 0; 
+        var b = 0; 
+        var operator = ''; 
+        var currentDisplay = ''; 
+
+        function appendDigit(num) {
+            currentDisplay += num; 
+            document.f1.display.value = currentDisplay; 
+        }
+
+        function setOperator(op) {
+            if (currentDisplay !== '') {
+                a = parseFloat(currentDisplay); 
+                operator = op; 
+                currentDisplay = ''; 
+                document.f1.display.value = a + ' ' + operator; 
+            }
+        }
+
+        function calculate() {
+            if (currentDisplay !== '') {
+                b = parseFloat(currentDisplay); 
+                var result;
+
+                switch (operator) {
+                    case '+':
+                        result = a + b;
+                        break;
+                    case '-':
+                        result = a - b;
+                        break;
+                    case '*':
+                        result = a * b;
+                        break;
+                    case '/':
+                        if (b !== 0) {
+                            result = a / b;
+                        } else {
+                            result = 'Cannot divide by 0';
+                        }
+                        break;
+                    case '%':
+                        result = a % b;
+                        break;
+                    default:
+                        result = 'Invalid Operation';
+                }
+
+                document.f1.display.value = result; 
+                currentDisplay = result; 
+                a = 0; 
+                b = 0; 
+                operator = '';
+            }
+        }
+
+        function clearAll() {
+            currentDisplay = '';
+            document.f1.display.value = ''; 
+            a = 0;
+            b = 0;
+            operator = '';
+        }
+
+        function square() {
+            if (currentDisplay !== '') {
+                var result = Math.pow(parseFloat(currentDisplay), 2); 
+                document.f1.display.value = result; 
+                currentDisplay = result; 
+            }
+        }
+    </script>
+</head>
+<body>
+   <div id="border">
+    <h1>Calculator</h1>
+    <div class="calculator">
+        <form name="f1">
+            <input type="text" name="display" class="display" readonly><br>
+
+            <!-- Buttons for numbers and operations -->
+            <div class="buttons">
+                <input type="button" value="1" onclick="appendDigit('1')">
+                <input type="button" value="2" onclick="appendDigit('2')">
+                <input type="button" value="3" onclick="appendDigit('3')">
+                <input type="button" value="+" onclick="setOperator('+')"><br>
+
+                <input type="button" value="4" onclick="appendDigit('4')">
+                <input type="button" value="5" onclick="appendDigit('5')">
+                <input type="button" value="6" onclick="appendDigit('6')">
+                <input type="button" value="-" onclick="setOperator('-')"><br>
+
+                <input type="button" value="7" onclick="appendDigit('7')">
+                <input type="button" value="8" onclick="appendDigit('8')">
+                <input type="button" value="9" onclick="appendDigit('9')">
+                <input type="button" value="*" onclick="setOperator('*')"><br>
+
+                <input type="button" value="0" onclick="appendDigit('0')">
+                <input type="button" value="." onclick="appendDigit('.')">
+                <input type="button" value="/" onclick="setOperator('/')">
+                <input type="button" value="%" onclick="setOperator('%')"><br>
+
+                <div class="last-row">
+                    <input type="button" value="=" onclick="calculate()">
+                    <input type="button" value="Clear" onclick="clearAll()" id="clear">
+                    <input type="button" value="x²" onclick="square()" id="square">
+                </div>
+            </div>
+        </form>
+    </div>
+   </div>
+</body>
+</html>
