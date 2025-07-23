@@ -34,9 +34,9 @@ Great for beginners learning DOM manipulation and event handling.
 ## 🌐 Preview
 
 You can open the `index.html` file in your browser, or check it out live here:  
-🔗 [Live Demo](https://your-username.github.io/Calculator-App/) 
+## 🔗 Live Preview
+👉 [Open Calculator](https://rohan3620.github.io/Calculator/)
 
-![Calculator Preview](./preview.png)
 
 ---
 
